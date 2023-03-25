@@ -135,7 +135,7 @@ class UI(QWidget):
         super(UI, self).__init__()
         
         # Load the UI File
-        uic.loadUi("design4.ui", self)
+        uic.loadUi("GUI/design4.ui", self)
         
         #Connect to the Serial Port
         self.__connectSerial__("COM29")
