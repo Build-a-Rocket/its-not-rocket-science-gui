@@ -49,7 +49,7 @@ class matplotGraph:
 #          ]
 
 #window = sg.Window("Demo", layout)
-serialPort = "COM30"
+serialPort = "COM29"
 ser = serial.Serial(serialPort)
 buffer = ""
 seperatorFound = False
