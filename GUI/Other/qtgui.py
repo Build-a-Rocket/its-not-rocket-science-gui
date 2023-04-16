@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QTextEdit
 from PyQt6 import uic, QtCore
 from pyqtgraph import PlotWidget
 from serial import Serial, unicode
-
+from PIL import Image
 from serial_thread import SerialThread
 from tele_graph import TelemetryGraph
 

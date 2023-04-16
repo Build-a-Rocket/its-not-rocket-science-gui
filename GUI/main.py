@@ -1,3 +1,4 @@
+from os import system
 import random
 
 from PyQt6 import QtCore, uic
@@ -9,8 +10,8 @@ from PyQt6 import *
 #from PySide6.QtWidgets import QLabel
 import pyqtgraph
 from serial import Serial, unicode
-
-
+from PIL import Image
+import io
 class TelemetryGraph:
 
     def __init__(self, graph, legend=False):
@@ -138,7 +139,7 @@ class UI(QWidget):
         uic.loadUi("GUI/design4.ui", self)
         
         #Connect to the Serial Port
-        self.__connectSerial__("COM29")
+        self.__connectSerial__("COM6")
         
         # update the Text Box
         self.__updateRAW__()
@@ -196,7 +197,8 @@ class UI(QWidget):
         self.gyroGraph.addLine('z', 'blue')
     
     def __setupImage__(self):
-        self.image = bytesImage(self.findChild(QLabel, 'VIDEO'), QPixmap("StarterImage.jpg"))
+        self.image = bytesImage(self.findChild(QLabel, 'VIDEO'), QPixmap("GUI\StarterImage.jpg"))
+    
     @QtCore.pyqtSlot()
     def connection_success(self):
         print('Connected!')
@@ -217,6 +219,7 @@ class UI(QWidget):
         try:
             self.allData += unicode(data, errors='ignore')
 
+            
             if self.allData.find('START') != -1 and self.allData.find('END') != -1:
                 s = self.allData.find('START')
                 e = self.allData.find('END')
@@ -244,6 +247,38 @@ class UI(QWidget):
                 self.gyroGraph.plotData(float(data[6]), self.y, name='x')
                 self.gyroGraph.plotData(float(data[7]), self.y, name='y')
                 self.gyroGraph.plotData(float(data[8]), self.y, name='z')
+            # check if the data starts with VED and ends with VFM
+            # if ("VFM" in self.allData) and ("VED" in self.allData):
+            #         imadata = self.allData
+            #         start_index = imadata.find('VFM') # Find index of start sequence
+            #         end_index = imadata.find('VED')
+            #         imadata = imadata[start_index + 3 : end_index ] # Slice out bytes between start and end sequences
+            #         print(imadata)
+            #         f = open("log.txt", "w")
+            #         f.write(imadata)
+            #         f.close()
+            #         imadata = bytes(imadata, "UTF-8")
+                    
+            #         # Convert imdata to an image using PIL
+
+            #         image = Image.open(io.BytesIO(imadata)) # Open data as a file-like object using BytesIO
+            #         self.allData = self.allData[end_index + 3:]
+            
+            if ("VED" in self.allData) and ("VFM" in self.allData):
+                s = self.allData.find('VED')
+                e = self.allData.find('VFM')
+                #print(e, s)
+                data = self.allData[e + 3: s]
+                data = bytes(data, "utf-8")
+                print(data)
+                image = Image.frombytes("RGB", (239, 175), data)
+                pixmap = QPixmap.fromImage(image)
+                self.image.__update__(pixmap)
+                self.allData = ""
+                print(self.allData)
+            
+        
+            
         except Exception as e:
             print(str(e))
     

@@ -163,5 +163,4 @@ void loop()
    Serial.println("sent: " + bytes);
    RadioHelpers::writeBytes(frame, bytes);
   }
-  delay(500);
 }
