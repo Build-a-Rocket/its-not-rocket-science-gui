@@ -1,6 +1,0 @@
-{
-    "port": "COM5",
-    "configuration": "CPUFreq=240,FlashMode=qio,FlashFreq=80",
-    "board": "esp32:esp32:esp32cam",
-    "sketch": "ArduinoEsp\\fulldemo.ino"
-}
