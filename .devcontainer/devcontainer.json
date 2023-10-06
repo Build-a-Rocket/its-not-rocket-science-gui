@@ -15,7 +15,8 @@
 	// "forwardPorts": [],
 
 	//Use 'postCreateCommand' to run commands after the container is created.
-	"onCreateCommand": ["apt-get update", "apt-get -y install sudo", "echo \"esp:esp\" | chpasswd", "adduser esp sudo"]
+	"remoteUser": "root",
+	"onCreateCommand": "./.devcontainer/postcreate.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
