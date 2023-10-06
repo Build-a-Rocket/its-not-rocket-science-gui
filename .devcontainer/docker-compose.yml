@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  devcontainer:
+    image: espressif/idf-rust:all_latest
+    volumes:
+      - ../..:/workspaces:cached
+      - /dev/ACM0:/dev/GRS
+      - /dev/USB0:/dev/FCS
+    command: sleep infinity
