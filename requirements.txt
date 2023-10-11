@@ -1,0 +1,17 @@
+asgiref==3.7.2
+Django==4.2.6
+image==1.5.33
+numpy==1.26.0
+Pillow==10.0.1
+PyQt6==6.5.2
+PyQt6-Qt6==6.5.2
+PyQt6-sip==13.5.2
+pyqtgraph==0.13.3
+pyserial==3.5
+PySide6==6.5.3
+PySide6-Addons==6.5.3
+PySide6-Essentials==6.5.3
+shiboken6==6.5.3
+six==1.16.0
+sqlparse==0.4.4
+tzdata==2023.3

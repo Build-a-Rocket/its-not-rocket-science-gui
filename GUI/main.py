@@ -139,7 +139,7 @@ class UI(QWidget):
         uic.loadUi("GUI/design4.ui", self)
         
         #Connect to the Serial Port
-        self.__connectSerial__("COM6")
+        self.__connectSerial__("COM7")
         
         # update the Text Box
         self.__updateRAW__()
@@ -264,18 +264,18 @@ class UI(QWidget):
             #         image = Image.open(io.BytesIO(imadata)) # Open data as a file-like object using BytesIO
             #         self.allData = self.allData[end_index + 3:]
             
-            if ("VED" in self.allData) and ("VFM" in self.allData):
-                s = self.allData.find('VED')
-                e = self.allData.find('VFM')
-                #print(e, s)
-                data = self.allData[e + 3: s]
-                data = bytes(data, "utf-8")
-                print(data)
-                image = Image.frombytes("RGB", (239, 175), data)
-                pixmap = QPixmap.fromImage(image)
-                self.image.__update__(pixmap)
-                self.allData = ""
-                print(self.allData)
+            # if ("VED" in self.allData) and ("VFM" in self.allData):
+            #     s = self.allData.find('VED')
+            #     e = self.allData.find('VFM')
+            #     #print(e, s)
+            #     data = self.allData[e + 3: s]
+            #     data = bytes(data, "utf-8")
+            #     print(data)
+            #     image = Image.frombytes("RGB", (239, 175), data)
+            #     pixmap = QPixmap.fromImage(image)
+            #     self.image.__update__(pixmap)
+            #     self.allData = ""
+            #     print(self.allData)
             
         
             
